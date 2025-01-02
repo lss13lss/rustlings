@@ -14,11 +14,11 @@ fn divide(a: i64, b: i64) -> Result<i64, DivisionError> {
     if b == 0 {
         return Err(DivisionError::DivideByZero);
     }
+    if a == i64::MIN && b == -1 {
+        return Err(DivisionError::IntegerOverflow);
+    }
     if a % b != 0 {
-        return Err(DivisionError::NotDivisible(NotDivisibleError{
-            dividend: a,
-            divisor:  b,
-        }));
+        return Err(DivisionError::NotDivisible);
     }
     Ok(a / b)
 }
@@ -27,20 +27,20 @@ fn divide(a: i64, b: i64) -> Result<i64, DivisionError> {
 // Desired output: `Ok([1, 11, 1426, 3])`
 fn result_with_list() -> Result<Vec<i64>, DivisionError>{
     let numbers = [27, 297, 38502, 81];
-    let division_results = numbers.into_iter().map(|n| divide(n, 27));
-    let mut result = Vec::new();
-    for res in division_results {
-        result.push(res?);
-    }
-    Ok(result)
+    numbers
+        .iter()
+        .map(|&n| divide(n, 27))
+        .collect()
 }
 
 // TODO: Add the correct return type and complete the function body.
 // Desired output: `[Ok(1), Ok(11), Ok(1426), Ok(3)]`
 fn list_of_results() > Vec<Result<i64, DivisionError>>{
     let numbers = [27, 297, 38502, 81];
-    let division_results = numbers.into_iter().map(|n| divide(n, 27));
-    division_results.collect()
+    numbers
+        .iter()
+        .map(|&n| divide(n, 27))
+        .collect()
 }
 
 fn main() {

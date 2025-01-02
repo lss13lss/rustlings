@@ -23,7 +23,7 @@ fn create_empty_list() -> List {
 
 // TODO: Create a non-empty cons list.
 fn create_non_empty_list() -> List {
-    list::Cons(1,Box::new(list::Cons(2,Box::new(list::Nil))))
+    list::Cons(1,Box::new(List::Cons(2,Box::new(List::Nil))))
 }
 
 fn main() {

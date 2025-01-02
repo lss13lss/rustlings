@@ -5,7 +5,7 @@
 use std::{sync::Arc, thread, time::Duration};
 
 struct JobStatus {
-    jobs_done: u32,
+    jobs_done: Mutex<u32>,
 }
 
 fn main() {

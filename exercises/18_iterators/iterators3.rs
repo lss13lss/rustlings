@@ -14,11 +14,11 @@ fn divide(a: i64, b: i64) -> Result<i64, DivisionError> {
     if b == 0 {
         return Err(DivisionError::DivideByZero);
     }
-    if a == i64::MIN && b == -1 {
-        return Err(DivisionError::IntegerOverflow);
-    }
     if a % b != 0 {
-        return Err(DivisionError::NotDivisible);
+        return Err(DivisionError::NotDivisible(NotDivisibleError{
+            dividend: a,
+            divisor:  b,
+        }));
     }
     Ok(a / b)
 }

@@ -20,7 +20,7 @@ fn char_counter<T: AsRef<str>>(arg: T) -> usize {
 fn num_sq<T: AsMut<u32>>(arg: &mut T) {
     // TODO: Implement the function body.
     let value = arg.as_mut();
-    *value = value * value;
+    *value *= *value;
 }
 
 fn main() {
